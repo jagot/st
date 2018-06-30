@@ -7,19 +7,22 @@ pkgrel=1
 pkgdesc='A simple virtual terminal emulator for X.'
 arch=('i686' 'x86_64')
 license=('MIT')
-depends=('libxft' 'libxext' 'xorg-fonts-misc')
+depends=('libxft' 'libxext' 'xorg-fonts-misc' 'consolas-font')
 makedepends=('ncurses')
 url="http://st.suckless.org"
 source=(http://dl.suckless.org/st/$pkgname-$pkgver.tar.gz
-        config.h)
+        config.h
+        gruvbox-dark.h)
 sha256sums=('c4fb0fe2b8d2d3bd5e72763e80a8ae05b7d44dbac8f8e3bb18ef0161c7266926'
-            'bed7977c855f02e3968a754e813015e4214b52102e3c54712d8a52245bcceeec')
+            '76b746f999bbc97fd27acc5753a13ac161b8617bcd759009456409affbcec4a5'
+            '2e61f96459fd596a06e7e5a5f72a01862afc4d83ad73865e0153c9f57ab4f060')
 
 prepare() {
   cd $srcdir/$pkgname-$pkgver
   # skip terminfo which conflicts with nsurses
   sed -i '/tic /d' Makefile
   cp $srcdir/config.h config.h
+  cp $srcdir/gruvbox-dark.h gruvbox-dark.h
 }
 
 build() {
